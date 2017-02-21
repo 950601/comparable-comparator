@@ -1,0 +1,61 @@
+import java.util.*;//compartor need
+import java.lang.*;//comparable need
+public class  Demo
+{
+	class ObjComparable implements Comparable<ObjComparable>//此处不给泛型会导致comparaTo方法找不到
+	{	
+		private int objID;
+
+		public ObjComparable(int objID){
+			this.objID= objID;
+		}
+
+		public int compareTo(ObjComparable other){
+			if(other.objID>this.objID)	return -1;
+			if(other.objID<this.objID)  return 1;
+			return 0;
+		}
+	}
+	
+	class ObjComparator implements Comparator<ObjComparator>
+	{
+		private String objID;
+
+		public ObjComparator(String objID){
+			this.objID= objID;
+		}
+		public ObjComparator(){
+		
+		}
+		public int compare(ObjComparator obj1,ObjComparator obj2){
+			if(obj1.objID.length()>obj2.objID.length())	return -1;//小
+			if(obj1.objID.length()<obj2.objID.length())  return 1;//大
+			return 0;	
+		}
+	
+	}
+	
+	public static void main(String[] args){
+		//comparable
+		ObjComparable obj = new Demo().new ObjComparable(1);
+		int result = obj.compareTo(new Demo().new ObjComparable(2));
+		System.out.println(result);
+
+		//comparater
+		ObjComparator obj1= new Demo().new ObjComparator("1");
+		ObjComparator obj2=	new Demo().new ObjComparator("2");
+		ObjComparator obj3=	new Demo().new ObjComparator("22");
+		List<ObjComparator> list = new ArrayList<ObjComparator>();
+		list.add(obj1);
+		list.add(obj2);
+		list.add(obj3);
+		int resultComparator = new Demo().new ObjComparator().compare(obj1,obj2);
+		//根据 compare 方法返回值进行排序
+		Collections.sort(list,new Demo().new ObjComparator());//排序之后再直接输出list即可
+		System.out.println(list.get(0).objID+"===="+list.get(1).objID+"===="+list.get(2).objID);
+		
+
+		
+	}
+
+}
